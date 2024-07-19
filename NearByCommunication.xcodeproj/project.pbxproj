@@ -295,6 +295,8 @@
 				DEVELOPMENT_TEAM = TC6Y6GF2PT;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NearByCommunication/Info.plist;
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "App Need Bluetooth Permission to comunicate";
+				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "App Need Bluetooth Permission to comunicate";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -323,6 +325,8 @@
 				DEVELOPMENT_TEAM = TC6Y6GF2PT;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NearByCommunication/Info.plist;
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "App Need Bluetooth Permission to comunicate";
+				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "App Need Bluetooth Permission to comunicate";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

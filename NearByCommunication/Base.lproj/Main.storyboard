@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -17,57 +18,89 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Message To Send" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BlB-AH-sMr">
-                                <rect key="frame" x="50" y="200" width="293" height="34"/>
+                                <rect key="frame" x="50" y="70" width="293" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="68n-sY-BPZ">
-                                <rect key="frame" x="138.66666666666666" y="274" width="116" height="48"/>
+                                <rect key="frame" x="138.66666666666666" y="144" width="115.66666666666666" height="48"/>
+                                <color key="backgroundColor" systemColor="systemGreenColor"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" image="message" catalog="system" title="Send">
+                                <buttonConfiguration key="configuration" style="plain" image="message" catalog="system" title="Send">
                                     <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle1"/>
                                     <color key="baseForegroundColor" systemColor="tableBackgroundColor"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="didTapSend:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zNU-DV-uir"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9gz-zJ-4UT">
-                                <rect key="frame" x="122.66666666666669" y="496" width="148" height="48"/>
+                                <rect key="frame" x="122.66666666666667" y="306" width="147.66666666666663" height="48"/>
+                                <color key="backgroundColor" systemColor="systemBlueColor"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" image="message" catalog="system" title="Receive">
+                                <buttonConfiguration key="configuration" style="plain" image="message" catalog="system" title="Receive">
                                     <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle1"/>
                                     <color key="baseForegroundColor" systemColor="tableBackgroundColor"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="didTapReceive:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bFc-E1-PWH"/>
+                                </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Received Message Will Display Here" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rGc-wO-dd1">
-                                <rect key="frame" x="50" y="422" width="293" height="34"/>
+                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Received Message Will Display Here" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rGc-wO-dd1">
+                                <rect key="frame" x="50" y="232" width="293" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Mgk-2K-gAP">
+                                <rect key="frame" x="20" y="404" width="353" height="404"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="k4Q-3g-whz"/>
                         <color key="backgroundColor" systemColor="systemGrayColor"/>
                         <constraints>
-                            <constraint firstItem="BlB-AH-sMr" firstAttribute="top" secondItem="DI9-i1-aYN" secondAttribute="top" constant="200" id="1Tk-iI-hq6"/>
-                            <constraint firstItem="9gz-zJ-4UT" firstAttribute="top" secondItem="rGc-wO-dd1" secondAttribute="bottom" constant="40" id="CN6-k6-BAw"/>
-                            <constraint firstItem="9gz-zJ-4UT" firstAttribute="centerX" secondItem="rGc-wO-dd1" secondAttribute="centerX" id="HHL-EC-KhC"/>
-                            <constraint firstItem="BlB-AH-sMr" firstAttribute="leading" secondItem="DI9-i1-aYN" secondAttribute="leading" constant="50" id="New-an-CMa"/>
-                            <constraint firstItem="rGc-wO-dd1" firstAttribute="top" secondItem="68n-sY-BPZ" secondAttribute="bottom" constant="100" id="SBO-kn-40F"/>
-                            <constraint firstAttribute="trailing" secondItem="rGc-wO-dd1" secondAttribute="trailing" constant="50" id="c6u-VY-RQL"/>
-                            <constraint firstAttribute="trailing" secondItem="BlB-AH-sMr" secondAttribute="trailing" constant="50" id="i5n-vv-VXE"/>
-                            <constraint firstItem="68n-sY-BPZ" firstAttribute="top" secondItem="BlB-AH-sMr" secondAttribute="bottom" constant="40" id="iuq-kQ-3Ls"/>
-                            <constraint firstItem="68n-sY-BPZ" firstAttribute="centerX" secondItem="BlB-AH-sMr" secondAttribute="centerX" id="qrI-N7-5bQ"/>
-                            <constraint firstItem="rGc-wO-dd1" firstAttribute="leading" secondItem="DI9-i1-aYN" secondAttribute="leading" constant="50" id="wNC-GP-BsL"/>
+                            <constraint firstItem="Mgk-2K-gAP" firstAttribute="top" secondItem="9gz-zJ-4UT" secondAttribute="bottom" constant="50" id="2IT-K8-ZAw"/>
+                            <constraint firstItem="BlB-AH-sMr" firstAttribute="leading" secondItem="k4Q-3g-whz" secondAttribute="leading" constant="50" id="2xa-7G-g3D"/>
+                            <constraint firstItem="68n-sY-BPZ" firstAttribute="top" secondItem="BlB-AH-sMr" secondAttribute="bottom" constant="40" id="3ri-wO-eJN"/>
+                            <constraint firstItem="rGc-wO-dd1" firstAttribute="top" secondItem="68n-sY-BPZ" secondAttribute="bottom" constant="40" id="EpJ-o1-ZNd"/>
+                            <constraint firstItem="k4Q-3g-whz" firstAttribute="trailing" secondItem="BlB-AH-sMr" secondAttribute="trailing" constant="50" id="RKw-7U-qx3"/>
+                            <constraint firstItem="9gz-zJ-4UT" firstAttribute="centerX" secondItem="Mgk-2K-gAP" secondAttribute="centerX" id="RVe-uV-e3x"/>
+                            <constraint firstItem="Mgk-2K-gAP" firstAttribute="leading" secondItem="k4Q-3g-whz" secondAttribute="leading" constant="20" id="ZLE-eO-tEi"/>
+                            <constraint firstItem="k4Q-3g-whz" firstAttribute="bottom" secondItem="Mgk-2K-gAP" secondAttribute="bottom" constant="10" id="ai2-E3-fh9"/>
+                            <constraint firstItem="9gz-zJ-4UT" firstAttribute="leading" secondItem="k4Q-3g-whz" secondAttribute="leading" constant="122.66666666666669" id="bAs-Rr-gVa"/>
+                            <constraint firstItem="9gz-zJ-4UT" firstAttribute="top" secondItem="DI9-i1-aYN" secondAttribute="top" constant="306" id="ibi-r1-nJc"/>
+                            <constraint firstItem="k4Q-3g-whz" firstAttribute="trailing" secondItem="Mgk-2K-gAP" secondAttribute="trailing" constant="20" id="sVz-6p-cWL"/>
+                            <constraint firstItem="rGc-wO-dd1" firstAttribute="leading" secondItem="k4Q-3g-whz" secondAttribute="leading" constant="50" id="sZZ-hi-75O"/>
+                            <constraint firstItem="9gz-zJ-4UT" firstAttribute="top" secondItem="rGc-wO-dd1" secondAttribute="bottom" constant="40" id="tnH-kF-3eq"/>
+                            <constraint firstItem="68n-sY-BPZ" firstAttribute="leading" secondItem="k4Q-3g-whz" secondAttribute="leading" constant="138.66666666666666" id="wSb-x3-hWB"/>
+                            <constraint firstItem="k4Q-3g-whz" firstAttribute="trailing" secondItem="rGc-wO-dd1" secondAttribute="trailing" constant="50" id="wl2-91-0vV"/>
+                            <constraint firstItem="9gz-zJ-4UT" firstAttribute="centerX" secondItem="68n-sY-BPZ" secondAttribute="centerX" id="xoj-L8-qQt"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tblEndpoints" destination="Mgk-2K-gAP" id="VtB-FM-EW9"/>
+                        <outlet property="txtReceiver" destination="rGc-wO-dd1" id="5qr-fK-D1z"/>
+                        <outlet property="txtSender" destination="BlB-AH-sMr" id="iNI-tf-qAh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="120" y="4"/>
+            <point key="canvasLocation" x="119.84732824427481" y="3.5211267605633805"/>
         </scene>
     </scenes>
     <resources>
         <image name="message" catalog="system" width="128" height="116"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemGrayColor">
-            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="tableBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -7,12 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		170D52AC2C4A48360086D7B4 /* NearbyConnections in Frameworks */ = {isa = PBXBuildFile; productRef = 170D52AB2C4A48360086D7B4 /* NearbyConnections */; };
 		17B1989E2C4A3020006D5F40 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B1989D2C4A3020006D5F40 /* AppDelegate.swift */; };
 		17B198A02C4A3020006D5F40 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B1989F2C4A3020006D5F40 /* SceneDelegate.swift */; };
 		17B198A22C4A3020006D5F40 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B198A12C4A3020006D5F40 /* ViewController.swift */; };
 		17B198A52C4A3020006D5F40 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 17B198A42C4A3020006D5F40 /* Base */; };
 		17B198A72C4A3021006D5F40 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17B198A62C4A3021006D5F40 /* Assets.xcassets */; };
 		17B198AA2C4A3021006D5F40 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 17B198A92C4A3021006D5F40 /* Base */; };
+		17B198B82C4A33FF006D5F40 /* ConnnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B198B72C4A33FF006D5F40 /* ConnnectionManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,7 @@
 		17B198A62C4A3021006D5F40 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		17B198A92C4A3021006D5F40 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		17B198AB2C4A3021006D5F40 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		17B198B72C4A33FF006D5F40 /* ConnnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnnectionManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +34,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				170D52AC2C4A48360086D7B4 /* NearbyConnections in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,6 +60,7 @@
 		17B1989C2C4A3020006D5F40 /* NearByCommunication */ = {
 			isa = PBXGroup;
 			children = (
+				17B198B62C4A33E0006D5F40 /* ConnectionManager */,
 				17B1989D2C4A3020006D5F40 /* AppDelegate.swift */,
 				17B1989F2C4A3020006D5F40 /* SceneDelegate.swift */,
 				17B198A12C4A3020006D5F40 /* ViewController.swift */,
@@ -65,6 +70,14 @@
 				17B198AB2C4A3021006D5F40 /* Info.plist */,
 			);
 			path = NearByCommunication;
+			sourceTree = "<group>";
+		};
+		17B198B62C4A33E0006D5F40 /* ConnectionManager */ = {
+			isa = PBXGroup;
+			children = (
+				17B198B72C4A33FF006D5F40 /* ConnnectionManager.swift */,
+			);
+			path = ConnectionManager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +96,9 @@
 			dependencies = (
 			);
 			name = NearByCommunication;
+			packageProductDependencies = (
+				170D52AB2C4A48360086D7B4 /* NearbyConnections */,
+			);
 			productName = NearByCommunication;
 			productReference = 17B1989A2C4A3020006D5F40 /* NearByCommunication.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +127,9 @@
 				Base,
 			);
 			mainGroup = 17B198912C4A3020006D5F40;
+			packageReferences = (
+				170D52AA2C4A48360086D7B4 /* XCRemoteSwiftPackageReference "nearby" */,
+			);
 			productRefGroup = 17B1989B2C4A3020006D5F40 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -138,6 +157,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				17B198B82C4A33FF006D5F40 /* ConnnectionManager.swift in Sources */,
 				17B198A22C4A3020006D5F40 /* ViewController.swift in Sources */,
 				17B1989E2C4A3020006D5F40 /* AppDelegate.swift in Sources */,
 				17B198A02C4A3020006D5F40 /* SceneDelegate.swift in Sources */,
@@ -218,7 +238,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -275,7 +295,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -292,7 +312,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = TC6Y6GF2PT;
+				DEVELOPMENT_TEAM = J9BMMS9TZV;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NearByCommunication/Info.plist;
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "App Need Bluetooth Permission to comunicate";
@@ -302,6 +322,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -322,7 +343,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = TC6Y6GF2PT;
+				DEVELOPMENT_TEAM = J9BMMS9TZV;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NearByCommunication/Info.plist;
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "App Need Bluetooth Permission to comunicate";
@@ -332,6 +353,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -367,6 +389,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		170D52AA2C4A48360086D7B4 /* XCRemoteSwiftPackageReference "nearby" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/nearby";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		170D52AB2C4A48360086D7B4 /* NearbyConnections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 170D52AA2C4A48360086D7B4 /* XCRemoteSwiftPackageReference "nearby" */;
+			productName = NearbyConnections;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 17B198922C4A3020006D5F40 /* Project object */;
 }

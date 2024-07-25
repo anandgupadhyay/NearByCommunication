@@ -44,6 +44,13 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         tblEndpoints.delegate = self
         tblEndpoints.dataSource = self
+
+        var some:String? = "okay"
+        if let str = some{
+            print(str)
+            str = "lets play"
+            print(str)
+        }
         
         connectionManager = ConnectionManager(serviceID: ServiceId, strategy: .cluster)
         

@@ -5,8 +5,13 @@
 //  Created by Anand Upadhyay on 19/07/24.
 //
 
+//import CoreWLAN
+//import Network
 import UIKit
 import NearbyConnections
+import NearbyCoreAdapter
+import CoreBluetooth
+
 extension String {
     func toData() -> Data {
         return Data(self.utf8)
@@ -20,7 +25,7 @@ extension Data {
    }
 
 
-class ViewController: UIViewController {
+class ViewController: UIViewController,CBCentralManagerDelegate {
     var arrEndPoints:[EndpointID] = []
     var arrEndPointNames:[String] = []//{
 //        didSet {
@@ -35,13 +40,17 @@ class ViewController: UIViewController {
     var discoverer: Discoverer?
 //    var delegate:TrackNearByConnectionDelegate?
     var isAdvertising = false
-    
+//    var peerManager = GGNSCentralPeerManager()
     @IBOutlet weak var tblEndpoints: UITableView!
     var connectedEndpointId: String = ""
     @IBOutlet weak var txtReceiver: UITextField!
     @IBOutlet weak var txtSender: UITextField!
+    var centralManager: CBCentralManager?
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        centralManager = CBCentralManager(delegate: self, queue: nil)
+        
         tblEndpoints.delegate = self
         tblEndpoints.dataSource = self
         
@@ -104,7 +113,12 @@ class ViewController: UIViewController {
         if message.isEmpty{
             message = "No Message"
         }
+        
+        GNCFlags.enableBLEV2 = true
         advertiser!.startAdvertising(using: message.toData())
+        
+        let mediums = GNCSupportedMediums(allMediumsEnabled: ())
+        print("mediums:\(mediums)")
     }
     
     func startDiscovering(){
@@ -119,6 +133,35 @@ class ViewController: UIViewController {
     func sendMessage(message:String,toEndpoint:EndpointID){
         let _ = connectionManager.send(message.toData(), to: [toEndpoint])
     }
+
+    func startScanning() {
+        let options = [CBCentralManagerScanOptionAllowDuplicatesKey: false]
+        centralManager?.scanForPeripherals(withServices: nil , options: options)
+    }
+
+    // MARK: - CBCentralManagerDelegate
+    @objc func centralManagerDidUpdateState(_ central: CBCentralManager){
+        switch central.state {
+        case .poweredOn:
+            startScanning()
+        default:
+            // Handle other states
+            break
+        }
+    }
+
+    func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber){
+        print("Device found: \(peripheral.name ?? "Unknown"), \(peripheral.identifier)")
+        print("RSSI: \(RSSI)")
+
+        // Optionally connect to the peripheral for further interactions
+        // centralManager.connect(peripheral, options: nil)
+    }
+
+    func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?){
+        // Handle connection failure
+
+    }
 }
 extension ViewController: AdvertiserDelegate {
   func advertiser(
@@ -126,25 +169,20 @@ extension ViewController: AdvertiserDelegate {
     with context: Data, connectionRequestHandler: @escaping (Bool) -> Void) {
     // Accept or reject any incoming connection requests. The connection will still need to
     // be verified in the connection manager delegate.
+//        jsonObject = try NSJSONSerialization.dataWithJSONObject(context, options: NSJSONWritingOptions())
+//        print(jsonObject) // This will print the below json.
+        if let str = String(data: context, encoding: .utf8) {
+            print("Successfully decoded: \(str)")
+        }
     connectionRequestHandler(true)
   }
 }
-//extension ViewController: TrackNearByConnectionDelegate{
-//    func connected(endppoint: EndpointID){
-//        self.connectedEndpointId = endppoint
-////        Example.shared.sendMessage(message: self.txtSender.text ?? "Hello", toEndpoint: self.connectedEndpointId)
-//    }
-//    
-//    func receivedMessage(message: String) {
-//        self.txtReceiver.text = message
-//        txtSender.resignFirstResponder()
-//    }
-//}
+
 extension ViewController: DiscovererDelegate {
   func discoverer(
     _ discoverer: Discoverer, didFind endpointID: EndpointID, with context: Data) {
         print("didFind:\(endpointID) context:\(context.toString())")
-        discoverer.requestConnection(to: endpointID, using: "Hello".toData())
+//        discoverer.requestConnection(to: endpointID, using: "Hello".toData())
         if !self.arrEndPoints.contains(endpointID){
             self.arrEndPoints.append(endpointID)
             self.arrEndPointNames.append(context.toString())
@@ -195,6 +233,7 @@ extension ViewController: ConnectionManagerDelegate {
     cancellationToken token: CancellationToken) {
     // We have received a readable stream.
         print("endpointID:\(endpointID) - didReceive stream")
+        
 
   }
 
@@ -266,17 +305,78 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
         return 50
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        if !isAdvertising{
-//            if self.connectedEndpointId == arrEndPoints[indexPath.row] {
-//                connectionManager.disconnect(from: arrEndPoints[indexPath.row])
-//            }
-//            
-//            self.discoverer?.requestConnection(to: arrEndPoints[indexPath.row], using: (self.txtSender.text ?? "Hello").toData()){ error in
-//                if error != nil{
-//                    print("Error in Connectiong:\(String(describing: error?.localizedDescription))")
-//                }
-//            }
-//        }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
+        if !isAdvertising{
+            if self.connectedEndpointId == arrEndPoints[indexPath.row] {
+                connectionManager.disconnect(from: arrEndPoints[indexPath.row])
+            }
+            
+            self.discoverer?.requestConnection(to: arrEndPoints[indexPath.row], using: (self.txtSender.text ?? "Hello").toData()){ error in
+                if error != nil{
+                    print("Error in Connectiong:\(String(describing: error?.localizedDescription))")
+                }
+            }
+        }
     }
 }
+
+
+//extension ViewController: TrackNearByConnectionDelegate{
+//    func connected(endppoint: EndpointID){
+//        self.connectedEndpointId = endppoint
+////        Example.shared.sendMessage(message: self.txtSender.text ?? "Hello", toEndpoint: self.connectedEndpointId)
+//    }
+//
+//    func receivedMessage(message: String) {
+//        self.txtReceiver.text = message
+//        txtSender.resignFirstResponder()
+//    }
+//}
+
+
+//
+//class MyViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDelegate {
+//    private var centralManager: CBCentralManager!
+//
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//        centralManager = CBCentralManager(delegate: self, queue: nil)
+//    }
+//
+//    func
+// startScanning() {
+//        let options = [CBCentralManagerScanOptionAllowDuplicatesKey: false]
+//        centralManager?.scanForPeripherals(withServices: nil, options: options)
+//
+//    }
+//
+//    // MARK: - CBCentralManagerDelegate
+//    func centralManagerDidUpdateState(_ central: CBCentralManager)
+// {
+//        switch central.state {
+//        case .poweredOn:
+//
+//            startScanning()
+//        default:
+//            // Handle other states
+//            break
+//        }
+//    }
+//
+//    func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi
+// RSSI: NSNumber) {
+//        print("Device
+// found: \(peripheral.name ?? "Unknown"), \(peripheral.identifier)")
+//        print("RSSI: \(RSSI)")
+//
+//        // Optionally connect to the peripheral for further interactions
+//        // centralManager.connect(peripheral, options: nil)
+//    }
+//
+//    func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?)
+// {
+//        // Handle connection failure
+//
+//    }
+//}
+              
